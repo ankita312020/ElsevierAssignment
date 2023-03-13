@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "037505d8-9303-4054-a615-ba0be9d45526",
+		"name": "Pure API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20754706"
+	},
+	"item": [
+		{
+			"name": "CreateExtOrg and OptionalFilelds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Verify the Optional Field\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"phoneNumber\");",
+							"});",
+							"pm.test(\"Verify the Title\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Testing Title\");",
+							"});",
+							"pm.test(\"Verify the UUID\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"uuid\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"user-agent": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": {\n    \"en_US\": \"Testing Title\"\n  },\n  \"phoneNumber\": \"+94 56372283\",\n  \"mobilePhoneNumber\": \"+45 4392343\",\n  \"fax\": \"3453234\",\n  \"email\": \"demo@example.com\",\n  \"bankAccountNumber\": \"3300000343033\",\n  \"vatNumber\": \"2300\",\n  \"address\": {\n    \"address1\": \"Copenhagen\",\n    \"address2\": \"Denmark\",\n    \"address3\": \"Aalborg\",\n    \"address4\": \"Middle Jutland\",\n    \"address5\": \"Finland\",\n    \"postalCode\": \"2300\",\n    \"city\": \"Pune\"\n    }\n  \n  }\n"
+				},
+				"url": {
+					"raw": "{{URL}}",
+					"host": [
+						"{{URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateExtOrg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Verify the Title\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"user-agent": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":{\"en_US\": \"My external organization\"}}"
+				},
+				"url": {
+					"raw": "{{URL}}",
+					"host": [
+						"{{URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RetriveExtOrg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Verify the body contain Title\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
+							"});",
+							"pm.test(\"Verify the body contain UUID\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"uuid\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/ae418972-9da1-419e-b958-30b9535b23c5",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"ae418972-9da1-419e-b958-30b9535b23c5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "82a01f82-5904-4ddd-9bd8-66dcdde64a9b",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
